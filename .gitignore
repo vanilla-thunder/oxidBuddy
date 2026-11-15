@@ -10,3 +10,8 @@
 
 # IDE settings
 /.idea/
+
+# Signing keys and certificates must never be committed
+*.pem
+*.crt
+/certificate/

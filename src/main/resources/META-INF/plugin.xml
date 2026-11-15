@@ -4,15 +4,40 @@
     <vendor>vanilla-thunder</vendor>
 
     <description><![CDATA[
-        Development helpers for OXID eShop projects.
+        Helpers for OXID eShop development.
         <ul>
-            <li>Completion of translation keys in <code>[{oxmultilang ident="..."}]</code> and
-                <code>Language::translateString('...')</code>, showing the translated text and the
-                module, theme or core file each key comes from.</li>
-            <li><b>Compare Translations With…</b> on a language file: a key-by-key comparison with
-                the same file in another language, to add missing keys or remove keys.</li>
+            <li><b>Translation key completion</b> in <code>[{oxmultilang ident="..."}]</code> and
+                <code>Language::translateString('...')</code>. Each suggestion shows the translated
+                text and where the key is defined: module, theme or core, the language, and
+                frontend or admin.</li>
+            <li><b>Compare Translations With…</b> on a language file: compares it key by key with
+                the same file in another language. Add missing keys, remove keys, or jump to a
+                key in its file.</li>
         </ul>
+        <p>
+            Requires the bundled PHP and Smarty plugins. For completion in templates, set the
+            Smarty delimiters of the project to <code>[{</code> and <code>}]</code>.
+        </p>
+        <p>
+            This plugin is AI-coded: the code was written by an AI model (Claude) working from a
+            human developer's instructions.
+        </p>
+        <p>
+            <a href="https://github.com/vanilla-thunder/oxidBuddy">Source code and documentation</a> ·
+            <a href="https://github.com/vanilla-thunder/oxidBuddy/issues">Issue tracker</a>
+        </p>
+        <p>
+            Independent project, not affiliated with or endorsed by OXID eSales AG or JetBrains.
+        </p>
     ]]></description>
+
+    <change-notes><![CDATA[
+        <b>0.1.0</b>
+        <ul>
+            <li>Translation key completion in Smarty templates and PHP</li>
+            <li>Key-by-key comparison of a language file in two languages</li>
+        </ul>
+    ]]></change-notes>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.jetbrains.php</depends>

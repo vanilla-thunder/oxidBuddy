@@ -108,10 +108,35 @@ compile and test platform, which takes several minutes and a few gigabytes.
 ```bash
 ./gradlew buildPlugin   # build/distributions/oxidBuddy-<version>.zip
 ./gradlew test          # run the test suite
+./gradlew verifyPlugin  # run the JetBrains Plugin Verifier, as JetBrains Marketplace does
 ./gradlew runIde        # start a sandbox PhpStorm with the plugin installed
 ```
 
 The target PhpStorm version is `platformVersion` in `gradle.properties`.
+
+## Releasing
+
+1. Set `version` in `gradle.properties` and describe the release in `<change-notes>` in
+   `src/main/resources/META-INF/plugin.xml`. JetBrains Marketplace rejects a version it already has.
+2. Run `./gradlew test verifyPlugin`.
+3. Build the signed ZIP with `./gradlew signPlugin`, or sign and upload in one go with
+   `./gradlew publishPlugin`. The very first version has to be uploaded by hand on
+   [JetBrains Marketplace](https://plugins.jetbrains.com/); `publishPlugin` works from the second
+   version on.
+
+Signing and publishing read their secrets from environment variables. Nothing is stored in the
+repository, and `*.pem` / `*.crt` files are ignored by git.
+
+| Variable | Content |
+|---|---|
+| `CERTIFICATE_CHAIN` | Certificate chain (`chain.crt`), Base64-encoded |
+| `PRIVATE_KEY` | Private key (`private.pem`), Base64-encoded |
+| `PRIVATE_KEY_PASSWORD` | Password of the private key |
+| `PUBLISH_TOKEN` | JetBrains Marketplace token, only for `publishPlugin` |
+
+How to create the key and certificate is described in the JetBrains
+[plugin signing guide](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html). Without
+these variables `./gradlew buildPlugin` still produces an unsigned ZIP.
 
 ## Project layout
 
@@ -139,3 +164,10 @@ To complete keys in further Smarty tags or PHP methods, extend `TRANSLATE_TAGS` 
 `SmartyTranslationKeyCompletionContributor.kt` or `TRANSLATE_METHODS` in
 `PhpTranslationKeyCompletionContributor.kt`. The preferred languages are `PREFERRED_LANGUAGES` in
 `TranslationKeys.kt`.
+
+## License
+
+[GNU General Public License v3.0](LICENSE).
+
+OXID Buddy is an independent project. It is not affiliated with or endorsed by OXID eSales AG or
+JetBrains.
