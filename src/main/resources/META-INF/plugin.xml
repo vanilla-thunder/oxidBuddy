@@ -1,0 +1,41 @@
+<idea-plugin>
+    <id>io.github.vanillathunder.oxidbuddy</id>
+    <name>OXID Buddy</name>
+    <vendor>vanilla-thunder</vendor>
+
+    <description><![CDATA[
+        Development helpers for OXID eShop projects.
+        <ul>
+            <li>Completion of translation keys in <code>[{oxmultilang ident="..."}]</code> and
+                <code>Language::translateString('...')</code>, showing the translated text and the
+                module, theme or core file each key comes from.</li>
+            <li><b>Compare Translations With…</b> on a language file: a key-by-key comparison with
+                the same file in another language, to add missing keys or remove keys.</li>
+        </ul>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.jetbrains.php</depends>
+    <depends>com.jetbrains.smarty</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileBasedIndex implementation="io.github.vanillathunder.oxidbuddy.translation.TranslationKeyIndex"/>
+        <completion.contributor
+                language="PHP"
+                implementationClass="io.github.vanillathunder.oxidbuddy.translation.PhpTranslationKeyCompletionContributor"/>
+        <completion.contributor
+                language="Smarty"
+                implementationClass="io.github.vanillathunder.oxidbuddy.translation.SmartyTranslationKeyCompletionContributor"/>
+    </extensions>
+
+    <actions>
+        <action id="OxidBuddy.CompareTranslations"
+                class="io.github.vanillathunder.oxidbuddy.translation.compare.CompareTranslationsAction"
+                text="Compare Translations With…"
+                description="Compare this OXID language file key by key with the same file in another language">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>

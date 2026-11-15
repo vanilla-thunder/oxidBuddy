@@ -1,0 +1,12 @@
+# Build output
+/build/
+
+# Gradle and Kotlin caches
+/.gradle/
+/.kotlin/
+
+# IntelliJ Platform Gradle Plugin cache
+/.intellijPlatform/
+
+# IDE settings
+/.idea/
